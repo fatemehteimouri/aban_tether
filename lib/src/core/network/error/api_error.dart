@@ -1,12 +1,33 @@
+// To parse this JSON data, do
+//
+//     final apiError = apiErrorFromJson(jsonString);
+
+import 'dart:convert';
+
+ApiError apiErrorFromJson(String str) => ApiError.fromJson(json.decode(str));
+
+String apiErrorToJson(ApiError data) => json.encode(data.toJson());
+
 class ApiError {
-  final String message;
-  final int? statusCode;
-  final String? errorDetails;
+  String? code;
+  String? message;
+  String? payload;
 
-  ApiError({required this.message, this.statusCode, this.errorDetails});
+  ApiError({
+    this.code,
+    this.message,
+    this.payload,
+  });
 
-  @override
-  String toString() {
-    return 'ApiError(message: $message, statusCode: $statusCode, errorDetails: $errorDetails)';
-  }
+  factory ApiError.fromJson(Map<String, dynamic> json) => ApiError(
+    code: json["code"],
+    message: json["message"],
+    payload: json["payload"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "code": code,
+    "message": message,
+    "payload": payload,
+  };
 }

@@ -26,11 +26,16 @@ class _LoginScreenState
     return BlocProvider(
       create: (context) => LoginCubit(loginUseCase: UseCaseContainer.Get<LoginUseCase>()),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: LoginForm(formKey: _formKey,)
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: LoginForm(formKey: _formKey,)
+          ),
         ),
-        bottomNavigationBar: LoginButton(formKey: _formKey),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LoginButton(formKey: _formKey),
+        ),
       ),
     );
   }

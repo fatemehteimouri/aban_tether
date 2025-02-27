@@ -1,7 +1,7 @@
 import 'package:aban_tether/src/core/network/interceptors/api_interceptor.dart';
 import 'package:aban_tether/src/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
+import 'package:dio/io.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api_type.dart';
@@ -29,6 +29,7 @@ class DioClient  with DioMixin implements Dio{
         maxWidth: 90));
 
     interceptors.add(ApiInterceptor(tokenStorage: tokenStorage));
+    httpClientAdapter = DefaultHttpClientAdapter();
   }
 
 }

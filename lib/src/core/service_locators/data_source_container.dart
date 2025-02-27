@@ -1,4 +1,5 @@
 import 'package:aban_tether/src/core/network/api_type.dart';
+import 'package:aban_tether/src/core/network/dio_client.dart';
 import 'package:aban_tether/src/core/service_locators/dio_container.dart';
 import 'package:aban_tether/src/data/auth/data_sources/auth_remote_datasource.dart';
 import 'package:get_it/get_it.dart';
@@ -13,8 +14,7 @@ class DataSourceContainer {
 
 
   static void register(){
-    getIt.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(dio: DioContainer.Get(ApiType.crypto)));
-    getIt.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(dio: DioContainer.Get(ApiType.auth)));
+    getIt.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource(dio: DioContainer.Get<DioClient>(ApiType.auth)));
   }
 
 }

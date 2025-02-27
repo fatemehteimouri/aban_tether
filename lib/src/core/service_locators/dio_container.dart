@@ -14,8 +14,8 @@ class DioContainer {
 
   static void register(){
     final tokenStorage = AppStorageContainer.Get<TokenStorage>();
-    getIt.registerLazySingleton(() => DioClient(apiType: ApiType.auth, tokenStorage: tokenStorage));
-    getIt.registerLazySingleton(() => DioClient(apiType: ApiType.crypto, tokenStorage: tokenStorage));
+    getIt.registerLazySingleton(() => DioClient(apiType: ApiType.auth, tokenStorage: tokenStorage),instanceName: ApiType.auth.name);
+    getIt.registerLazySingleton(() => DioClient(apiType: ApiType.crypto, tokenStorage: tokenStorage),instanceName: ApiType.crypto.name);
 
 
 

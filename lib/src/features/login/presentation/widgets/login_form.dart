@@ -9,7 +9,7 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
         key: formKey,
-        child: Column(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
               validator: FormBuilderValidators.compose([

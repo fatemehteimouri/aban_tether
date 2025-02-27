@@ -13,9 +13,9 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomElevatedButton(
       onTap: () async{
-        if (!formKey.currentState!.validate()) {
+        if (formKey.currentState!.validate()) {
           final cubit = BlocProvider.of<LoginCubit>(context,listen: false);
-          cubit.login(LoginParam());
+          return cubit.login(LoginParam());
         }
       },
       title: "Submit",

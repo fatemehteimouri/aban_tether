@@ -1,6 +1,10 @@
 import 'package:aban_tether/src/core/service_locators/data_source_container.dart';
 import 'package:aban_tether/src/core/storage/token_storage.dart';
 import 'package:aban_tether/src/data/authentication_service/auth/data_sources/auth_remote_datasource.dart';
+import 'package:aban_tether/src/data/cryptocurrency_service/ctypto/data_source/crypto_remote_datasource.dart';
+import 'package:aban_tether/src/data/cryptocurrency_service/favorite/data_source/favorites_remote_datasource.dart';
+import 'package:aban_tether/src/features/home/data/repositories/home_repository_impl.dart';
+import 'package:aban_tether/src/features/home/domain/repositories/home_repository.dart';
 import 'package:aban_tether/src/features/login/data/repositories/login_repository_impl.dart';
 import 'package:aban_tether/src/features/login/domain/repositories/login_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -16,5 +20,6 @@ class RepositoryContainer {
 
   static void register(){
     getIt.registerLazySingleton<LoginRepo>(() => LoginImpl(authRemoteDataSource: DataSourceContainer.Get<AuthRemoteDataSource>(), tokenStorage: AppStorageContainer.Get<TokenStorage>()));
+    getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(cryptoRemoteDatasource: DataSourceContainer.Get<CryptoRemoteDatasource>(), favoriteRemoteDatasource: DataSourceContainer.Get<FavoriteRemoteDatasource>()));
   }
 }

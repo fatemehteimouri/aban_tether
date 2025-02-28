@@ -1,3 +1,4 @@
+import 'package:aban_tether/src/core/extensions/context_extension.dart';
 import 'package:aban_tether/src/features/profile/presentation/update_phone_number/bloc/update_phone_number_cubit.dart';
 import 'package:aban_tether/src/utils/validators/app_regex.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,8 @@ class _UpdatePhoneNumberFormState extends State<UpdatePhoneNumberForm> {
             keyboardType: TextInputType.phone,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
-              FormBuilderValidators.phoneNumber(regex: RegExp(AppRegex.iranianMobile)),
+              FormBuilderValidators.phoneNumber(
+                  regex: RegExp(AppRegex.iranianMobile)),
             ]),
             onChanged: (value) {
               cubit.param = cubit.param.copyWith(phoneNumber: value);
@@ -44,9 +46,7 @@ class _UpdatePhoneNumberFormState extends State<UpdatePhoneNumberForm> {
                 if (state is UpdatePhoneNumberSuccess) {
                   context.pop();
                 } else if (state is UpdatePhoneNumberFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.message)),
-                  );
+                  context.showSnack(state.message);
                 }
               },
               builder: (context, state) {

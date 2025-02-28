@@ -1,3 +1,4 @@
+import 'package:aban_tether/src/core/extensions/context_extension.dart';
 import 'package:aban_tether/src/features/home/presentation/bloc/home_cubit.dart';
 import 'package:aban_tether/src/features/home/presentation/widgets/coin_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,14 @@ class CoinsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocConsumer<HomeCubit, HomeState>(
+      listenWhen: (previous, current) => current is HomeError,
+      listener: (context, state) {
+        if(state is HomeError){
+          context.showSnack(state.message);
+        }
+      },
+      buildWhen: (previous, current) => current is HomeLoading || current is HomeLoaded,
       builder: (context, state) {
         if (state is HomeLoading) {
           return const Center(child: CircularProgressIndicator());

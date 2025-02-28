@@ -1,4 +1,5 @@
 import 'package:aban_tether/src/features/home/domain/models/entities/coin_entity.dart';
+import 'package:aban_tether/src/features/home/presentation/widgets/coin_favorite_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class CoinWidget extends StatelessWidget {
@@ -11,16 +12,7 @@ class CoinWidget extends StatelessWidget {
       title: Text(coin.name??"-"),
       subtitle: Text('${coin.price} USD'),
       leading: Image.network(coin.iconAddress??''),
-      trailing: IconButton(
-        icon: Icon(coin.isFavorite ? Icons.favorite : Icons.favorite_border),
-        onPressed: () {
-          // context.read<Ho>().toggleFavoriteCoin(
-          //   coin.id,
-          //   coin.isFavorite,
-          //   coin.favoriteId,
-          // );
-        },
-      ),
+      trailing:  CoinFavoriteIconButton(coinEntity: coin,),
     );
   }
 }

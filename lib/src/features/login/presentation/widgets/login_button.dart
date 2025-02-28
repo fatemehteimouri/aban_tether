@@ -12,29 +12,30 @@ class LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit,LoginState>(
-      listenWhen: (previous, current) => current is LoginSuccess || current is LoginFailure,
-      listener: (context, state) {
-        if(state is LoginSuccess){
-
-        }else if(state is LoginSuccess){
-          context.goNamed(homeAppRoute);
-        }
-
-      },
-      builder: (context,state) {
-        final bool isLoading = state is LoginLoading;
-        return ElevatedButton(
-          onPressed:isLoading
-            ? null :() async{
-            if (formKey.currentState!.validate()) {
-              final cubit = BlocProvider.of<LoginCubit>(context,listen: false);
-              return cubit.login();
-            }
-          },
-          child: isLoading ? const CircularProgressIndicator(): const Text("Submit"),
-        );
-      }
-    );
+    return BlocConsumer<LoginCubit, LoginState>(
+        listenWhen: (previous, current) =>
+            current is LoginSuccess || current is LoginFailure,
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            context.goNamed(homeAppRoute);
+          } else if (state is LoginFailure) {}
+        },
+        builder: (context, state) {
+          final bool isLoading = state is LoginLoading;
+          return ElevatedButton(
+            onPressed: isLoading
+                ? null
+                : () async {
+                    if (formKey.currentState!.validate()) {
+                      final cubit =
+                          BlocProvider.of<LoginCubit>(context, listen: false);
+                      return cubit.login();
+                    }
+                  },
+            child: isLoading
+                ? const CircularProgressIndicator()
+                : const Text("Submit"),
+          );
+        });
   }
 }

@@ -24,8 +24,10 @@ class LoginForm extends StatelessWidget {
                 FormBuilderValidators.required(),
                 FormBuilderValidators.email()
               ]),
-              decoration: const InputDecoration(hintText: "email"),
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(labelText: "email"),
             ),
+            const SizedBox(height: 10,),
             TextFormField(
               onChanged: (value) {
                 cubit.loginParam = cubit.loginParam.copyWith(password: value);
@@ -33,7 +35,7 @@ class LoginForm extends StatelessWidget {
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
               ]),
-              decoration: const InputDecoration(hintText: "password"),
+              decoration: const InputDecoration(labelText: "password"),
             ),
           ],
         ));

@@ -8,45 +8,29 @@ class ApiInterceptor extends Interceptor {
   ApiInterceptor({required this.tokenStorage});
 
   @override
-  Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    if (options.extra['requiresToken'] != true) {
-      return super.onRequest(options, handler);
-    }
-    String? token = await tokenStorage.getToken();
-    options.headers['Authorization'] = 'Bearer $token';
-    return super.onRequest(options, handler);
-  }
-
-  @override
-  Future<void> onResponse(
-      Response response, ResponseInterceptorHandler handler) async {
-    switch (response.statusCode) {
-      case 200:
-        return handler.next(response);
-      case 500:
-        return handler.reject(DioError(
-          error: ApiError.fromJson(response.data),
-          requestOptions: response.requestOptions,
-          response: response,
-          message: 'Server error occurred!',
-        ));
-      default:
-        return handler.reject(DioError(
-          error: ApiError.fromJson(response.data),
-          requestOptions: response.requestOptions,
-          response: response,
-          message: response.statusMessage ?? 'Unknown error',
-        ));
-    }
-  }
-
-  @override
   Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
     if (err.error is ApiError) {
       return handler.next(err);
     } else {
-      return handler.reject(err.copyWith(message: 'Unexpected Error!'));
+      ApiError apiError;
+      switch (err.type) {
+        case DioExceptionType.badResponse:
+          apiError = ApiError.fromJson(err.response?.data);
+          break;
+        case DioExceptionType.connectionTimeout:
+          apiError = ApiError(message: 'خطای سرور: ${err.message}');
+          break;
+        case DioExceptionType.connectionError:
+          apiError = ApiError(message: 'خطای اتصال: ${err.message}');
+          break;
+        default:
+          apiError = ApiError(message: 'خطای ناشناخته: ${err.message}');
+          break;
+      }
+
+      return handler.reject(err.copyWith(
+        error: apiError,
+      ));
     }
   }
 }

@@ -3,7 +3,7 @@
 //     final cryptoCurrencyEntity = cryptoCurrencyEntityFromJson(jsonString);
 
 
-class CryptoCurrencyEntity {
+class CoinEntity {
   int? id;
   String? createdAt;
   String? name;
@@ -11,8 +11,9 @@ class CryptoCurrencyEntity {
   String? symbol;
   String? iconAddress;
   bool? isFavorite;
+  int? favoriteId;
 
-  CryptoCurrencyEntity({
+  CoinEntity({
     this.id,
     this.createdAt,
     this.name,
@@ -20,9 +21,10 @@ class CryptoCurrencyEntity {
     this.symbol,
     this.iconAddress,
     this.isFavorite,
+    this.favoriteId,
   });
 
-  CryptoCurrencyEntity copyWith({
+  CoinEntity copyWith({
     int? id,
     String? createdAt,
     String? name,
@@ -30,8 +32,9 @@ class CryptoCurrencyEntity {
     String? symbol,
     String? iconAddress,
     bool? isFavorite,
+    int? favoriteId,
   }) =>
-      CryptoCurrencyEntity(
+      CoinEntity(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
         name: name ?? this.name,
@@ -39,6 +42,7 @@ class CryptoCurrencyEntity {
         symbol: symbol ?? this.symbol,
         iconAddress: iconAddress ?? this.iconAddress,
         isFavorite: isFavorite ?? this.isFavorite,
+        favoriteId: favoriteId ?? this.favoriteId,
       );
 
 }

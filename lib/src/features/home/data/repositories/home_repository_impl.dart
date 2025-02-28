@@ -19,7 +19,7 @@ class HomeRepoImpl extends HomeRepo{
 
 
   @override
-  Future<List<CoinEntity>> getAllCoins() {
+  Future<List<CoinEntity>> getCoins() {
     return cryptoRemoteDatasource.getCryptoCurrencies().then((response) => response.map((e) => e.toEntity()).toList(),);
   }
 

@@ -10,7 +10,7 @@ class CoinEntity {
   int? price;
   String? symbol;
   String? iconAddress;
-  bool? isFavorite;
+  bool isFavorite;
   int? favoriteId;
 
   CoinEntity({
@@ -20,7 +20,7 @@ class CoinEntity {
     this.price,
     this.symbol,
     this.iconAddress,
-    this.isFavorite,
+    this.isFavorite = false,
     this.favoriteId,
   });
 

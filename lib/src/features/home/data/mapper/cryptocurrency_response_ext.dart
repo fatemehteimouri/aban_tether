@@ -9,7 +9,7 @@ extension CryptoCurrencyResponseExt on CryptoCurrencyResponse{
         id: id,
         name: name,
         iconAddress: iconAddress,
-        isFavorite: isFavorite,
+        isFavorite: isFavorite??false,
         price: price,
         symbol: symbol
     );

@@ -34,7 +34,7 @@ class CombineCoinsUseCase {
 
       return mergedCoins;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

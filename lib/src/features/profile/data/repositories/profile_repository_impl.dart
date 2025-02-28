@@ -6,20 +6,30 @@ import 'package:aban_tether/src/features/profile/domain/models/entities/me_entit
 import 'package:aban_tether/src/features/profile/domain/models/param_models/update_phone_number_param.dart';
 import 'package:aban_tether/src/features/profile/domain/repositories/profile_repository.dart';
 
-class ProfileRepositoryImpl extends ProfileRepo{
+class ProfileRepositoryImpl extends ProfileRepo {
   final UserRemoteDatasource userRemoteDatasource;
   final AuthRemoteDataSource authRemoteDataSource;
 
-  ProfileRepositoryImpl({required this.userRemoteDatasource, required this.authRemoteDataSource});
+  ProfileRepositoryImpl(
+      {required this.userRemoteDatasource, required this.authRemoteDataSource});
 
   @override
-  Future<void> updatePhoneNumber(UpdatePhoneNumberParam param) {
-    return userRemoteDatasource.updatePhoneNumber(param.toRequest());
+  Future<void> updatePhoneNumber(
+      {required UpdatePhoneNumberParam param, required int userId}) {
+    try {
+      return userRemoteDatasource.updatePhoneNumber(request: param.toRequest(),userId: userId);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<MeEntity> getMe() {
-    return authRemoteDataSource.getMe().then((response) => response.toEntity(),);
+  Future<MeEntity> getMe() async {
+    try {
+      final response = await authRemoteDataSource.getMe();
+      return response.toEntity();
+    } catch (e) {
+      rethrow;
+    }
   }
-
 }

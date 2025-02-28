@@ -16,6 +16,8 @@ class ProfileForm extends StatelessWidget {
         readOnly: true,
         decoration: const InputDecoration(labelText: "name"),
       ),
+        const SizedBox(height: 16),
+
         TextFormField(
           initialValue: meEntity.email,
           readOnly: true,

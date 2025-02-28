@@ -8,7 +8,7 @@ final ProfileRepo profileRepo;
 
 
 
-  Future<void> call(UpdatePhoneNumberParam param){
-    return profileRepo.updatePhoneNumber(param);
+  Future<void> call( {required UpdatePhoneNumberParam param, required int userId}){
+    return profileRepo.updatePhoneNumber(param: param,userId: userId);
   }
 }

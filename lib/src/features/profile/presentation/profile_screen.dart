@@ -16,40 +16,43 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          SwitchAppTheme()
-        ],
+        actions: const [SwitchAppTheme()],
       ),
       body: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => ProfileCubit(getMeUseCase: UseCaseContainer.Get<GetMeUseCase>()),),
-          BlocProvider(create: (_) => UpdatePhoneNumberCubit(updatePhoneNumberUseCase: UseCaseContainer.Get<UpdatePhoneNumberUseCase>()),)
+          BlocProvider(
+            create: (_) => ProfileCubit(
+                getMeUseCase: UseCaseContainer.Get<GetMeUseCase>()),
+          ),
         ],
-        child: Builder(
-          builder: (context) {
-            return BlocBuilder<ProfileCubit,ProfileState>(
-
+        child: Builder(builder: (context) {
+          return BlocBuilder<ProfileCubit, ProfileState>(
               buildWhen: (previous, current) => current is! ProfileInitial,
-                builder: (context,state) {
-                if(state is ProfileLoaded){
-                  return  Column(mainAxisAlignment: MainAxisAlignment.center,
+              builder: (context, state) {
+                if (state is ProfileLoaded) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ProfileForm(meEntity: state.meEntity,),
-                      const UpdatePhoneNumberForm(),
+                      ProfileForm(
+                        meEntity: state.meEntity,
+                      ),
+                      BlocProvider(
+                        create: (_) => UpdatePhoneNumberCubit(
+                          meEntity: state.meEntity,
+                            updatePhoneNumberUseCase: UseCaseContainer.Get<
+                                UpdatePhoneNumberUseCase>()),
+                      )
                     ],
                   );
-                }else if(state is ProfileLoading){
+                } else if (state is ProfileLoading) {
                   return const Center(child: CircularProgressIndicator());
-                }else if(state is ProfileError){
-                  return  Center(child: Text(state.message));
-                }else{
+                } else if (state is ProfileError) {
+                  return Center(child: Text(state.message));
+                } else {
                   return const SizedBox();
                 }
-
-              }
-            );
-          }
-        ),
+              });
+        }),
       ),
     );
   }

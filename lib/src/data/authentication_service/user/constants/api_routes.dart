@@ -1,1 +1,1 @@
-const String updatePhoneNumberApiRoute = 'user/{user_id}';
+const String userControllerName = 'user';

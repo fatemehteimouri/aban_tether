@@ -3,6 +3,7 @@ import 'package:aban_tether/src/features/home/domain/models/entities/coin_entity
 import 'package:aban_tether/src/features/home/domain/usecases/add_coin_to_favorite_usecase.dart';
 import 'package:aban_tether/src/features/home/domain/usecases/combine_coins_usecase.dart';
 import 'package:aban_tether/src/features/home/domain/usecases/delete_coin_from_favorite_usecase.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'home_state.dart';
@@ -16,7 +17,9 @@ class HomeCubit extends Cubit<HomeState> {
     required this.combineCoinsUseCase,
     required this.addCoinToFavoriteUseCase,
     required this.deleteCoinFromFavoriteUseCase,
-  }) : super(HomeInitial());
+  }) : super(HomeInitial()){
+    fetchCoins();
+  }
 
   Future<void> fetchCoins() async {
     emit(HomeLoading());
@@ -24,6 +27,8 @@ class HomeCubit extends Cubit<HomeState> {
       final coins = await combineCoinsUseCase.call();
       emit(HomeLoaded(coins));
     } on ApiError catch (e) {
+      print("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[");
+      print(e.toJson());
       emit(HomeError(e.message??""));
     } catch (e) {
       emit(const HomeError('An unexpected error occurred'));

@@ -8,7 +8,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
       path: '/',
-      redirect: (context, state) => '/home', // تغییر مسیر به صفحه لاگین
+      redirect: (context, state) => '/profile', // تغییر مسیر به صفحه لاگین
     ),
     GoRoute(
       name: loginAppRoute,

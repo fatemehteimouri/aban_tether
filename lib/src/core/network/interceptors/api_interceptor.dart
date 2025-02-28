@@ -16,16 +16,15 @@ class ApiInterceptor extends Interceptor {
           apiError = ApiError.fromJson(err.response?.data);
           break;
         case DioExceptionType.connectionTimeout:
-          apiError = ApiError(message: 'خطای سرور: ${err.message}');
+          apiError = ApiError(message: 'خطای سرور');
           break;
         case DioExceptionType.connectionError:
-          apiError = ApiError(message: 'خطای اتصال: ${err.message}');
+          apiError = ApiError(message: 'خطای اتصال');
           break;
         default:
-          apiError = ApiError(message: 'خطای ناشناخته: ${err.message}');
+          apiError = ApiError(message: 'خطای ناشناخته');
           break;
       }
-
       return handler.reject(err.copyWith(
         error: apiError,
       ));

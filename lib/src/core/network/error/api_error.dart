@@ -8,7 +8,7 @@ ApiError apiErrorFromJson(String str) => ApiError.fromJson(json.decode(str));
 
 String apiErrorToJson(ApiError data) => json.encode(data.toJson());
 
-class ApiError {
+class ApiError implements Exception{
   String? code;
   String? message;
   String? payload;
@@ -30,4 +30,8 @@ class ApiError {
     "message": message,
     "payload": payload,
   };
+
+
+  @override
+  String toString() => message??'An unexpected error occurred';
 }

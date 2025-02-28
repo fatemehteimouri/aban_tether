@@ -18,12 +18,11 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       await loginUseCase.call(loginParam);
       emit(LoginSuccess());
-    } catch (e) {
-      final String errorMessage = (e is DioError)
-          ? (e.error as ApiError?)?.message ?? ""
-          : 'Login failed: $e';
+    } on DioException catch (e) {
+      emit(LoginFailure((e.error as ApiError).toString()));
+    }catch (e){
+      emit(LoginFailure(e.toString()));
 
-      emit(LoginFailure(errorMessage));
     }
   }
 }

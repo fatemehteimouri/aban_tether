@@ -7,8 +7,13 @@ class AddCoinToFavoriteUseCase{
   const AddCoinToFavoriteUseCase({required this.homeRepo});
 
 
-  Future<int> call(AddCoinToFavoriteParam param){
-    return homeRepo.addCoinToFavorite(param);
+  Future<int> call(AddCoinToFavoriteParam param) async {
+    try{
+      final response = await homeRepo.addCoinToFavorite(param);
+      return response;
+    }catch(e){
+      rethrow;
+    }
   }
 
 }

@@ -1,6 +1,8 @@
 import 'package:aban_tether/src/features/profile/presentation/update_phone_number/bloc/update_phone_number_cubit.dart';
+import 'package:aban_tether/src/utils/validators/app_regex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 
 class UpdatePhoneNumberForm extends StatefulWidget {
@@ -24,11 +26,16 @@ class _UpdatePhoneNumberFormState extends State<UpdatePhoneNumberForm> {
           const SizedBox(height: 16),
           TextFormField(
             decoration: const InputDecoration(labelText: 'Phone Number'),
+            keyboardType: TextInputType.phone,
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+              FormBuilderValidators.phoneNumber(regex: RegExp(AppRegex.iranianMobile)),
+            ]),
             onChanged: (value) {
               cubit.param = cubit.param.copyWith(phoneNumber: value);
             },
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 30),
           BlocConsumer<UpdatePhoneNumberCubit, UpdatePhoneNumberState>(
               listenWhen: (previous, current) =>
                   current is UpdatePhoneNumberSuccess ||

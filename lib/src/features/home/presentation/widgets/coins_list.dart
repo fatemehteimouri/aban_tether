@@ -23,10 +23,11 @@ class CoinsList extends StatelessWidget {
         }
         if (state is HomeLoaded) {
           return ListView.builder(
+            cacheExtent: 10,
             itemCount: state.coins.length,
             itemBuilder: (context, index) {
               final coin = state.coins[index];
-              return CoinWidget(coin: coin);
+              return CoinWidget(key: ValueKey(coin.id),coin: coin);
             },
           );
         }

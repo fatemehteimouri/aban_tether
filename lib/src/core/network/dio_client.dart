@@ -1,3 +1,4 @@
+import 'package:aban_tether/src/core/network/interceptors/api_interceptor.dart';
 import 'package:aban_tether/src/core/network/interceptors/auth_interceptor.dart';
 import 'package:aban_tether/src/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
@@ -28,7 +29,8 @@ import 'api_type.dart';
           error: true,
           compact: true,
           maxWidth: 90),
-      AuthInterceptor(tokenStorage: tokenStorage)
+      AuthInterceptor(tokenStorage: tokenStorage),
+      ApiInterceptor(),
     ]);
 
     httpClientAdapter = DefaultHttpClientAdapter();

@@ -1,11 +1,9 @@
 import 'package:aban_tether/src/core/network/error/api_error.dart';
-import 'package:aban_tether/src/core/storage/token_storage.dart';
 import 'package:dio/dio.dart';
 
 class ApiInterceptor extends Interceptor {
-  final TokenStorage tokenStorage;
 
-  ApiInterceptor({required this.tokenStorage});
+  ApiInterceptor();
 
   @override
   Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {

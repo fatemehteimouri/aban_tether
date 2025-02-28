@@ -1,2 +1,4 @@
 
-const Login_AppRoute = 'login';
+const loginAppRoute = 'login';
+const homeAppRoute = 'home';
+const profileAppRoute = 'profile';

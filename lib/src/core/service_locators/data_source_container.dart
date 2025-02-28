@@ -1,7 +1,7 @@
 import 'package:aban_tether/src/core/network/api_type.dart';
 import 'package:aban_tether/src/core/network/dio_client.dart';
 import 'package:aban_tether/src/core/service_locators/dio_container.dart';
-import 'package:aban_tether/src/data/auth/data_sources/auth_remote_datasource.dart';
+import 'package:aban_tether/src/data/authentication_service/auth/data_sources/auth_remote_datasource.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

@@ -1,4 +1,5 @@
 import 'package:aban_tether/src/core/config/router/app_routes.dart';
+import 'package:aban_tether/src/core/extensions/context_extension.dart';
 import 'package:aban_tether/src/features/login/domain/models/param_models/login_param.dart';
 import 'package:aban_tether/src/features/login/presentation/bloc/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,9 @@ class LoginButton extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccess) {
             context.goNamed(homeAppRoute);
-          } else if (state is LoginFailure) {}
+          } else if (state is LoginFailure) {
+            context.showSnack(state.message);
+          }
         },
         builder: (context, state) {
           final bool isLoading = state is LoginLoading;

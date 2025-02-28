@@ -20,9 +20,8 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccess());
     } on DioException catch (e) {
       emit(LoginFailure((e.error as ApiError).toString()));
-    }catch (e){
+    } catch (e) {
       emit(LoginFailure(e.toString()));
-
     }
   }
 }

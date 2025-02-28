@@ -1,13 +1,19 @@
-// To parse this JSON data, do
-//
-//     final loginRequest = loginRequestFromJson(jsonString);
-
 class LoginParam {
-  String? email;
-  String? password;
+  final String? email;
+  final String? password;
 
   LoginParam({
     this.email,
     this.password,
   });
+
+  LoginParam copyWith({
+    String? email,
+    String? password,
+  }) {
+    return LoginParam(
+      email: email ?? this.email,
+      password: password ?? this.password,
+    );
+  }
 }

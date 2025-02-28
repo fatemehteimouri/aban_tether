@@ -11,14 +11,14 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
 
   LoginCubit({required this.loginUseCase}) : super(LoginInitial());
+  LoginParam loginParam = LoginParam();
 
-  Future<void> login(LoginParam param) async {
+  Future<void> login() async {
     emit(LoginLoading());
     try {
-      await loginUseCase.call(param);
-      emit(LoginSuccess()); // حالت success
+      await loginUseCase.call(loginParam);
+      emit(LoginSuccess());
     } catch (e) {
-      print(e);
       final String errorMessage = (e is DioError)
           ? (e.error as ApiError?)?.message ?? ""
           : 'Login failed: $e';

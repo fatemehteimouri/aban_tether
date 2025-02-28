@@ -9,7 +9,7 @@ class AppRouter {
       redirect: (context, state) => '/login', // تغییر مسیر به صفحه لاگین
     ),
     GoRoute(
-      name: Login_AppRoute,
+      name: loginAppRoute,
       path: '/login', // مسیر صفحه لاگین
       builder: (context, state) => const LoginScreen(),
     ),

@@ -1,5 +1,4 @@
 part of '../data_sources/auth_remote_datasource.dart';
 
-const loginApiRoute = 'auth/login';
-const meApiRoute = 'auth/me';
-const updatePhoneNumberAiRoute = '/user/{user_id}';
+const String loginApiRoute = 'auth/login';
+const String meApiRoute = 'auth/me';

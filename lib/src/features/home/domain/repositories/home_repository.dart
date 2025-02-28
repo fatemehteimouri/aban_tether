@@ -2,4 +2,6 @@ import 'package:aban_tether/src/features/home/domain/models/entities/cryptocurre
 
 abstract class HomeRepo{
   Future<CryptoCurrencyEntity> getCryptoCurrencies();
+  Future<CryptoCurrencyEntity> addToFavorite();
+  Future<CryptoCurrencyEntity> remoteFromFavorite();
 }

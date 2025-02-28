@@ -1,2 +1,1 @@
-
-const updatePhoneNumberAiRoute = '/user/{user_id}';
+const String updatePhoneNumberApiRoute = 'user/{user_id}';

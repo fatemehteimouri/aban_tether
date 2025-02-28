@@ -1,3 +1,4 @@
+import 'package:aban_tether/src/core/components/switch_app_theme.dart';
 import 'package:aban_tether/src/core/service_locators/usecase_container.dart';
 import 'package:aban_tether/src/features/profile/domain/usecases/get_me_usecase.dart';
 import 'package:aban_tether/src/features/profile/domain/usecases/update_phone_number_usecase.dart';
@@ -14,6 +15,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: const [
+          SwitchAppTheme()
+        ],
+      ),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => ProfileCubit(getMeUseCase: UseCaseContainer.Get<GetMeUseCase>()),),

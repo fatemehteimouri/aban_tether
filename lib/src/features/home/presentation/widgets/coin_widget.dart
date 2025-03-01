@@ -17,7 +17,7 @@ class CoinWidget extends StatelessWidget {
       ),
 
       subtitle: Text('${coin.price} USD'),
-      leading:coin.iconAddress == null ? const SizedBox(): SizedBox(width: 50,height: 50,child: CachedSvgImage(imageUrl:coin.iconAddress??'')),
+      leading: CachedSvgImage(imageUrl:coin.iconAddress),
       trailing:  CoinFavoriteIconButton(coinEntity: coin,),
     );
   }

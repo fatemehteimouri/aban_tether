@@ -10,7 +10,7 @@ String getFavoriteCoinResponseToJson(GetFavoriteCoinResponse data) => json.encod
 
 class GetFavoriteCoinResponse {
   int? id;
-  String? createdAt;
+  int? createdAt;
   int? userId;
   int? cryptocurrencyId;
 
@@ -23,7 +23,7 @@ class GetFavoriteCoinResponse {
 
   GetFavoriteCoinResponse copyWith({
     int? id,
-    String? createdAt,
+    int? createdAt,
     int? userId,
     int? cryptocurrencyId,
   }) =>

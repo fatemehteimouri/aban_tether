@@ -10,9 +10,9 @@ String cryptoCurrencyResponseToJson(CryptoCurrencyResponse data) => json.encode(
 
 class CryptoCurrencyResponse {
   int? id;
-  String? createdAt;
+  int? createdAt;
   String? name;
-  int? price;
+  double? price;
   String? symbol;
   String? iconAddress;
   bool? isFavorite;
@@ -29,9 +29,9 @@ class CryptoCurrencyResponse {
 
   CryptoCurrencyResponse copyWith({
     int? id,
-    String? createdAt,
+    int? createdAt,
     String? name,
-    int? price,
+    double? price,
     String? symbol,
     String? iconAddress,
     bool? isFavorite,
@@ -50,7 +50,7 @@ class CryptoCurrencyResponse {
     id: json["id"],
     createdAt: json["created_at"],
     name: json["name"],
-    price: json["price"],
+    price: json["price"].toDouble(),
     symbol: json["symbol"],
     iconAddress: json["icon_address"],
     isFavorite: json["is_favorite"],

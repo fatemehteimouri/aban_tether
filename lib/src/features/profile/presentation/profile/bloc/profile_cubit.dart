@@ -20,9 +20,9 @@ class ProfileCubit extends Cubit<ProfileState> {
       final meEntity = await getMeUseCase.call();
       emit(ProfileLoaded(meEntity: meEntity));
     } on DioException catch (e) {
-      emit(ProfileError((e.error as ApiError).toString()));
-    }catch (e){
-      emit(ProfileError(e.toString()));
+      emit(ProfileError((e).error.toString()));
+    }catch(e){
+      emit(ProfileError((e).toString()));
 
     }
   }

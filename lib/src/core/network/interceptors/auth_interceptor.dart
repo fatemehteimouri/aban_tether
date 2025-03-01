@@ -12,7 +12,7 @@ class AuthInterceptor extends Interceptor {
       RequestOptions options,
       RequestInterceptorHandler handler,
       ) async {
-    if (options.extra['requiresToken'] == true) {
+    if (options.extra['requiresToken'] != false) {
       try {
         String? token = await tokenStorage.getToken();
         if (token != null) {

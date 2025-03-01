@@ -36,6 +36,8 @@ class FavoriteRemoteDatasource {
   }
 
   Future<List<GetFavoriteCoinResponse>> getFavoriteCoins() async {
+
+
     try{
       final response =await dio.get(favoriteControllerName);
 

@@ -22,7 +22,7 @@ class RepositoryContainer {
   }
 
   static void register(){
-    getIt.registerLazySingleton<LoginRepo>(() => LoginImpl(authRemoteDataSource: DataSourceContainer.Get<AuthRemoteDataSource>(), tokenStorage: AppStorageContainer.Get<TokenStorage>()));
+    getIt.registerLazySingleton<LoginRepo>(() => LoginImpl(authRemoteDataSource: DataSourceContainer.Get<AuthRemoteDataSource>()));
     getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepositoryImpl(authRemoteDataSource: DataSourceContainer.Get<AuthRemoteDataSource>(), userRemoteDatasource: AppStorageContainer.Get<UserRemoteDatasource>()));
     getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(cryptoRemoteDatasource: DataSourceContainer.Get<CryptoRemoteDatasource>(), favoriteRemoteDatasource: DataSourceContainer.Get<FavoriteRemoteDatasource>()));
   }

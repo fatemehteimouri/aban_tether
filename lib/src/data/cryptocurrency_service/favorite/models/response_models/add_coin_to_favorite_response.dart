@@ -10,7 +10,7 @@ String addCoinToFavoriteResponseToJson(AddCoinToFavoriteResponse data) => json.e
 
 class AddCoinToFavoriteResponse {
   int? id;
-  String? createdAt;
+  int? createdAt;
   int? userId;
   int? cryptocurrencyId;
 
@@ -23,7 +23,7 @@ class AddCoinToFavoriteResponse {
 
   AddCoinToFavoriteResponse copyWith({
     int? id,
-    String? createdAt,
+    int? createdAt,
     int? userId,
     int? cryptocurrencyId,
   }) =>

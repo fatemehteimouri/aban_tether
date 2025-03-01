@@ -27,7 +27,7 @@ class CoinsList extends StatelessWidget {
             itemCount: state.coins.length,
             itemBuilder: (context, index) {
               final coin = state.coins[index];
-              return CoinWidget(key: ValueKey(coin.id),coin: coin);
+              return  CoinWidget(key: ValueKey(coin.id),coin: coin);
             },
           );
         }

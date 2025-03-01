@@ -1,7 +1,7 @@
 
 class FavoriteCoinEntity {
   final int? id;
-  final String? createdAt;
+  final int? createdAt;
   final int? userId;
   final int? cryptocurrencyId;
 

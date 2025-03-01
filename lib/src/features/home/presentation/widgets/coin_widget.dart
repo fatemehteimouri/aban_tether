@@ -13,7 +13,7 @@ class CoinWidget extends StatelessWidget {
     return ListTile(
       title: Text(coin.name??"-"),
       subtitle: Text('${coin.price} USD'),
-      leading: CustomImage(imageUrl:coin.iconAddress??''),
+      leading: CircleAvatar(radius: 50,child:coin.iconAddress == null ? const SizedBox(): CachedSvgImage(imageUrl:coin.iconAddress??''),),
       trailing:  CoinFavoriteIconButton(coinEntity: coin,),
     );
   }

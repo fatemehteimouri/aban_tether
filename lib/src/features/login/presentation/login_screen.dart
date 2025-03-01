@@ -1,5 +1,4 @@
 import 'package:aban_tether/src/core/components/switch_app_theme.dart';
-import 'package:aban_tether/src/core/config/theme/bloc/theme_cubit.dart';
 import 'package:aban_tether/src/core/service_locators/usecase_container.dart';
 import 'package:aban_tether/src/features/login/domain/usecases/login_usecase.dart';
 import 'package:aban_tether/src/features/login/presentation/bloc/login_cubit.dart';

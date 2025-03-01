@@ -1,30 +1,70 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:aban_tether/src/features/login/presentation/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:aban_tether/src/features/login/presentation/bloc/login_cubit.dart';
+import 'package:aban_tether/src/features/login/domain/usecases/login_usecase.dart';
+import 'package:mockito/mockito.dart';
 
-import 'package:aban_tether/main.dart';
+// Mock برای LoginUseCase
+class MockLoginUseCase extends Mock implements LoginUseCase {}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('Login and navigate to home', (WidgetTester tester) async {
+    // Mock LoginUseCase
+    final mockLoginUseCase = MockLoginUseCase();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(loginUseCase: mockLoginUseCase),
+          child: const LoginScreen(),
+        ),
+      ),
+    );
+
+    // وارد کردن ایمیل و رمز عبور
+    await tester.enterText(find.byType(TextFormField).at(0), 'test@example.com');
+    await tester.enterText(find.byType(TextFormField).at(1), 'password123');
+
+    // کلیک روی دکمه‌ی Submit
+    await tester.tap(find.text('Submit'));
+    await tester.pumpAndSettle();
+
+    // بررسی ناوبری به صفحه‌ی خانه
+    expect(find.text('Home Page'), findsOneWidget);
+  });
+
+  testWidgets('Show error message when login fails', (WidgetTester tester) async {
+    // Mock LoginUseCase
+    final mockLoginUseCase = MockLoginUseCase();
+
+    // شبیه‌سازی خطای API
+    when(mockLoginUseCase.call(any)).thenThrow(Exception('Login failed'));
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(loginUseCase: mockLoginUseCase),
+          child: const LoginScreen(),
+        ),
+      ),
+    );
+
+    // وارد کردن ایمیل و رمز عبور
+    await tester.enterText(find.byType(TextFormField).at(0), 'test@example.com');
+    await tester.enterText(find.byType(TextFormField).at(1), 'wrongpassword');
+
+    // کلیک روی دکمه‌ی Submit
+    await tester.tap(find.text('Submit'));
+    await tester.pumpAndSettle();
+
+    // بررسی نمایش پیام خطا
+    expect(find.text('Login failed'), findsOneWidget);
   });
 }

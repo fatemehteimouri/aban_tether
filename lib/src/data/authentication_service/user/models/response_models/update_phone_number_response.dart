@@ -6,7 +6,7 @@
 
 class UpdatePhoneNumberResponse {
   int? id;
-  String? createdAt;
+  int? createdAt;
   String? name;
   String? email;
   String? password;

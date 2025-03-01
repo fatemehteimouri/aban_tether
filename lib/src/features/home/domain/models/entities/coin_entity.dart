@@ -3,17 +3,19 @@
 //     final cryptoCurrencyEntity = cryptoCurrencyEntityFromJson(jsonString);
 
 
-class CoinEntity {
-  int? id;
-  String? createdAt;
-  String? name;
-  int? price;
-  String? symbol;
-  String? iconAddress;
-  bool isFavorite;
-  int? favoriteId;
+import 'package:equatable/equatable.dart';
 
-  CoinEntity({
+class CoinEntity extends Equatable{
+   int? id;
+   int? createdAt;
+   String? name;
+   double? price;
+   String? symbol;
+   String? iconAddress;
+   bool isFavorite;
+   int? favoriteId;
+
+   CoinEntity({
     this.id,
     this.createdAt,
     this.name,
@@ -26,9 +28,9 @@ class CoinEntity {
 
   CoinEntity copyWith({
     int? id,
-    String? createdAt,
+    int? createdAt,
     String? name,
-    int? price,
+    double? price,
     String? symbol,
     String? iconAddress,
     bool? isFavorite,
@@ -44,5 +46,9 @@ class CoinEntity {
         isFavorite: isFavorite ?? this.isFavorite,
         favoriteId: favoriteId ?? this.favoriteId,
       );
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id,isFavorite,favoriteId];
 
 }

@@ -8,7 +8,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(routes: [
     GoRoute(
       path: '/',
-      redirect: (context, state) => '/profile', // تغییر مسیر به صفحه لاگین
+      redirect: (context, state) => '/home',
     ),
     GoRoute(
       name: loginAppRoute,
@@ -20,6 +20,7 @@ class AppRouter {
       builder: (context, state) => const ProfileScreen(),
     ),
     GoRoute(
+      name: homeAppRoute,
       path: '/home',
       builder: (context, state) => const HomeScreen(),
     ),

@@ -10,7 +10,7 @@ String meResponseToJson(MeResponse data) => json.encode(data.toJson());
 
 class MeResponse {
   int? id;
-  String? createdAt;
+  int? createdAt;
   String? name;
   String? email;
 

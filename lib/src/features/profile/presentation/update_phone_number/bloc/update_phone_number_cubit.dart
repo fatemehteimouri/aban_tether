@@ -25,7 +25,6 @@ class UpdatePhoneNumberCubit extends Cubit<UpdatePhoneNumberState> {
       emit(UpdatePhoneNumberFailure((e.error as ApiError).toString()));
     }catch (e){
       emit(UpdatePhoneNumberFailure(e.toString()));
-
     }
   }
 

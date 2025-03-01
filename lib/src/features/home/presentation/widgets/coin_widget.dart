@@ -9,6 +9,7 @@ class CoinWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(coin.iconAddress);
     return ListTile(
       title: Text(coin.name??"-"),
       subtitle: Text('${coin.price} USD'),

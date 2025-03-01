@@ -18,13 +18,9 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         actions: const [SwitchAppTheme()],
       ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (_) => ProfileCubit(
-                getMeUseCase: UseCaseContainer.Get<GetMeUseCase>()),
-          ),
-        ],
+      body: BlocProvider(
+        create: (_) =>
+            ProfileCubit(getMeUseCase: UseCaseContainer.Get<GetMeUseCase>()),
         child: Builder(builder: (context) {
           return BlocBuilder<ProfileCubit, ProfileState>(
               buildWhen: (previous, current) => current is! ProfileInitial,
@@ -39,8 +35,11 @@ class ProfileScreen extends StatelessWidget {
                       BlocProvider(
                         create: (_) => UpdatePhoneNumberCubit(
                           meEntity: state.meEntity,
-                            updatePhoneNumberUseCase: UseCaseContainer.Get<
-                                UpdatePhoneNumberUseCase>()),
+                          updatePhoneNumberUseCase:
+                              UseCaseContainer.Get<UpdatePhoneNumberUseCase>(),
+
+                        ),
+                        child: const UpdatePhoneNumberForm(),
                       )
                     ],
                   );

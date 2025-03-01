@@ -15,6 +15,7 @@ class AuthRemoteDataSource {
       final response = await dio.post(
         loginApiRoute,
         data: request.toJson(),
+        options: Options(extra: {"requiresToken":false})
       );
       return LoginResponse.fromJson(response.data);
     } on DioException catch (e) {

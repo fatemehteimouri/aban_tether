@@ -19,6 +19,7 @@ class CryptoRemoteDatasource {
     } on DioException catch (e) {
       rethrow;
     } catch (e) {
+      print(e);
       throw ApiError(message: 'خطای ناشناخته: ${e.toString()}');
     }
   }

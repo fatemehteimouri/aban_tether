@@ -8,7 +8,11 @@ final ProfileRepo profileRepo;
 
 
 
-  Future<void> call( {required UpdatePhoneNumberParam param, required int userId}){
-    return profileRepo.updatePhoneNumber(param: param,userId: userId);
+  Future<void> call( {required UpdatePhoneNumberParam param, required int userId}) async {
+    try{
+      await profileRepo.updatePhoneNumber(param: param,userId: userId);
+    }catch(e) {
+      rethrow;
+    }
   }
 }

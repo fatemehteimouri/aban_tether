@@ -2,29 +2,77 @@ part of 'home_cubit.dart';
 
 
 abstract class HomeState extends Equatable{
-  const HomeState();
-  @override
-  List<Object?> get props => [];
-}
-
-class HomeInitial extends HomeState {}
-
-class HomeLoading extends HomeState {}
-
-class HomeLoaded extends HomeState {
   final List<CoinEntity> coins;
 
-  const HomeLoaded(this.coins);
+  const HomeState({required this.coins});
+
+  HomeState copyWith({
+    List<CoinEntity>? coins,
+  });
+
   @override
   List<Object?> get props => coins;
 }
 
+class HomeLoading extends HomeState {
+  const HomeLoading({required super.coins});
+  @override
+  HomeLoaded copyWith({
+    List<CoinEntity>? coins,
+  }) {
+    return HomeLoaded(
+      coins: coins ?? this.coins,
+    );
+  }
+}
+class HomeRenew extends HomeState {
+  const HomeRenew({required super.coins});
+  @override
+  HomeLoaded copyWith({
+    List<CoinEntity>? coins,
+  }) {
+    return HomeLoaded(
+      coins: coins ?? this.coins,
+    );
+  }
+}
+
+class HomeLoaded extends HomeState {
+
+  const HomeLoaded({required super.coins});
+
+  @override
+  HomeLoaded copyWith({
+    List<CoinEntity>? coins,
+  }) {
+    return HomeLoaded(
+      coins: coins ?? this.coins,
+    );
+  }
+
+  @override
+  List<Object?> get props => coins;
+}
+
+
 class HomeError extends HomeState {
   final String message;
 
-  const HomeError(this.message);
+  const HomeError({required this.message, required super.coins});
+
 
 
   @override
-  List<Object?> get props => [message];
+  HomeError copyWith({
+    String? message,
+    List<CoinEntity>? coins,
+  }) {
+    return HomeError(
+      message: message ?? this.message,
+      coins: coins ?? this.coins,
+    );
+  }
+
+  @override
+  List<Object?> get props => [message,coins];
 }

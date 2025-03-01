@@ -28,9 +28,12 @@ class _CoinFavoriteIconButtonState extends State<CoinFavoriteIconButton> {
           setState(() {
             _isLoading = true;
           });
-          await context
-              .read<HomeCubit>()
-              .toggleFavoriteHome(coin: widget.coinEntity);
+          final updatedCoin = await context.read<HomeCubit>().toggleFavorite(widget.coinEntity);
+          if(updatedCoin != null){
+            widget.coinEntity.favoriteId = updatedCoin.favoriteId;
+            widget.coinEntity.isFavorite = updatedCoin.isFavorite;
+          }
+
           setState(() {
             _isLoading = false;
           });

@@ -9,11 +9,15 @@ class CoinWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(coin.iconAddress);
     return ListTile(
-      title: Text(coin.name??"-"),
+      title: Row(
+        children: [
+          Expanded(child: Text(coin.name??"-",style: const TextStyle(overflow: TextOverflow.ellipsis,),maxLines: 1,)),
+        ],
+      ),
+
       subtitle: Text('${coin.price} USD'),
-      leading: CircleAvatar(radius: 50,child:coin.iconAddress == null ? const SizedBox(): CachedSvgImage(imageUrl:coin.iconAddress??''),),
+      leading:coin.iconAddress == null ? const SizedBox(): SizedBox(width: 50,height: 50,child: CachedSvgImage(imageUrl:coin.iconAddress??'')),
       trailing:  CoinFavoriteIconButton(coinEntity: coin,),
     );
   }
